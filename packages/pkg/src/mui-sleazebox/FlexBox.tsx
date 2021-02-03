@@ -5,8 +5,7 @@ import {
   createStyles,
   makeStyles,
   useTheme,
-  BoxProps,
-  ThemeProvider
+  BoxProps
 } from '@material-ui/core'
 import clsx from 'clsx'
 import {
@@ -282,16 +281,10 @@ const ChildBox = ({
   className: classNameProp,
   ...rest
 }: ChildBoxProps) => {
-  const theme = useTheme()
   return (
-    <ThemeProvider theme={theme}>
-      <EnhancedBox
-        className={clsx(['flexBox__child', classNameProp])}
-        {...rest}
-      >
-        {children}
-      </EnhancedBox>
-    </ThemeProvider>
+    <EnhancedBox className={clsx(['flexBox__child', classNameProp])} {...rest}>
+      {children}
+    </EnhancedBox>
   )
 }
 
