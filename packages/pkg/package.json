@@ -1,0 +1,50 @@
+{
+  "name": "mui-sleazebox",
+  "description": "A Material-UI component that makes Flexbox simpler.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wheredoesyourmindgo/mui-sleazebox"
+  },
+  "version": "0.0.7",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "npm run build",
+    "type-check": "tsc -p .",
+    "install-peers": "install-peers -f",
+    "build": "microbundle --jsx React.createElement --no-compress --tsconfig tsconfig.json",
+    "dev": "yarn build watch",
+    "clean": "rimraf {dist,.rts2*}"
+  },
+  "author": "Abe Hendricks<moemanchu@icloud.com>",
+  "devDependencies": {
+    "@types/react": "^16.9.55",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "install-peers-cli": "^2.2.0",
+    "microbundle": "^0.12.4",
+    "prettier": "^2.0.4",
+    "typescript": "^4.0.5"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.11.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1"
+  }
+}

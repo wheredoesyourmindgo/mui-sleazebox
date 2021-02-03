@@ -1,0 +1,40 @@
+{
+  "name": "mui-sleazebox-mono",
+  "description": "Mono-repo for mui-sleazebox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wheredoesyourmindgo/mui-sleazebox"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "material-ui",
+    "react",
+    "flex box",
+    "flex"
+  ],
+  "main": "packages/client/dist/index.js",
+  "files": [
+    "packages/client/dist/",
+    "packages/server/dist/",
+    "README.md"
+  ],
+  "author": "Abe Hendricks<moemanchu@icloud.com>",
+  "scripts": {
+    "build:pkg": "yarn --cwd packages/pkg build",
+    "build:demo": "yarn --cwd packages/demo build",
+    "dev:pkg": "yarn --cwd packages/pkg dev",
+    "dev:demo": "yarn --cwd packages/demo dev",
+    "build": "yarn build:pkg",
+    "prepublish": "npm run build",
+    "watch:src": "nodemon --delay 1 --watch ./packages/pkg/dist/ --exec \"yarn --cwd packages/demo run cp-dist\"",
+    "dev": "concurrently -n pkg,demo,cp-dist 'yarn dev:pkg' 'yarn dev:demo' 'yarn watch:src'"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
