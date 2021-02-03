@@ -5,12 +5,10 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    'jest/globals': true,
     node: true
   },
   plugins: [
     'react',
-    'jest',
     'prettier',
     'import',
     'react-hooks',
@@ -22,7 +20,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/warnings',
     'plugin:import/errors',
-    'plugin:jest/recommended',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/react',

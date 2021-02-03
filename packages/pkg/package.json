@@ -19,7 +19,7 @@
     "prepublish": "npm run build",
     "type-check": "tsc -p .",
     "install-peers": "install-peers -f",
-    "build": "microbundle --jsx React.createElement --no-compress --tsconfig tsconfig.json",
+    "build": "microbundle --no-compress --tsconfig tsconfig.json",
     "dev": "yarn build watch",
     "clean": "rimraf {dist,.rts2*}"
   },

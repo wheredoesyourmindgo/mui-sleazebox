@@ -5,6 +5,5 @@ import type {
   ColumnBoxProps,
   FlexBoxProps
 } from './mui-sleazebox/FlexBox'
-export default FlexBox
 export {RowBox, ColumnBox, ChildBox, FlexBox}
 export type {RowBoxProps, ChildBoxProps, ColumnBoxProps, FlexBoxProps}

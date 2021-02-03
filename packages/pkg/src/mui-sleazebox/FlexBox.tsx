@@ -1,5 +1,12 @@
 import React, {useMemo} from 'react'
-import {Box, Theme, createStyles, makeStyles, useTheme, BoxProps} from '@material-ui/core'
+import {
+  Box,
+  Theme,
+  createStyles,
+  makeStyles,
+  useTheme,
+  BoxProps
+} from '@material-ui/core'
 import clsx from 'clsx'
 import {
   Breakpoint,
