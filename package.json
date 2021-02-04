@@ -10,12 +10,6 @@
     "packages/*"
   ],
   "license": "MIT",
-  "keywords": [
-    "material-ui",
-    "react",
-    "flex box",
-    "flex"
-  ],
   "main": "packages/client/dist/index.js",
   "files": [
     "packages/client/dist/",

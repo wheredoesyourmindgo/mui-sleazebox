@@ -5,6 +5,12 @@
     "type": "git",
     "url": "https://github.com/wheredoesyourmindgo/mui-sleazebox"
   },
+  "keywords": [
+    "material-ui",
+    "react",
+    "flex box",
+    "flex"
+  ],
   "version": "0.0.5",
   "main": "dist/index.js",
   "license": "MIT",
