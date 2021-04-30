@@ -22,8 +22,7 @@ module.exports = {
     'plugin:import/errors',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier/react',
-    'prettier/@typescript-eslint'
+    'prettier'
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -47,6 +46,7 @@ module.exports = {
     '@typescript-eslint/prefer-interface': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-use-before-define': ['error', {functions: false}]
   },
   settings: {

@@ -11,6 +11,7 @@ declare type Props = {
 } & Omit<BoxProps, 'flex'>;
 export declare type RowBoxProps = Props & {
     responsive?: boolean | Breakpoint;
+    halfRespSpacing?: boolean;
 };
 export declare type ChildBoxProps = {
     children?: React.ReactNode;
@@ -19,7 +20,7 @@ export declare type ChildBoxProps = {
 export type { Props as FlexBoxProps };
 export type { Props as ColumnBoxProps };
 declare const FlexBox: ({ children, child, className: classNameProp, ...rest }: Props) => JSX.Element;
-declare const RowBox: ({ children, flexSpacing, className: classNameProp, responsive, flexWrap, wrapSpacing: wrapSpacingProp, ...rest }: RowBoxProps) => JSX.Element;
+declare const RowBox: ({ children, flexSpacing, halfRespSpacing, className: classNameProp, responsive, flexWrap, wrapSpacing: wrapSpacingProp, ...rest }: RowBoxProps) => JSX.Element;
 declare const ColumnBox: ({ children, flexSpacing, className: classNameProp, ...rest }: Props) => JSX.Element;
 declare const ChildBox: ({ children, className: classNameProp, ...rest }: ChildBoxProps) => JSX.Element;
 export { RowBox, ColumnBox, ChildBox, FlexBox };

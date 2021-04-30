@@ -10,7 +10,7 @@ const IndexPage = () => {
     <main className="App">
       <div>
         <Spacing />
-        <RowBox flexSpacing={4}>
+        <RowBox flexSpacing={6} responsive>
           <ChildBox flex="50%" width={200} height={200} bgcolor="#eeeeee">
             1.
           </ChildBox>

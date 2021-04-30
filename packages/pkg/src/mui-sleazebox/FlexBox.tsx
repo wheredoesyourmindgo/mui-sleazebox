@@ -31,11 +31,15 @@ type Props = {
 type RowBoxUseStylesProps = {
   flexSpacing?: number
   wrapSpacing?: number
+  halfRespSpacing?: boolean
   respBreakAt: Breakpoint
   respElseAt: Breakpoint
 }
 type ColBoxUseStylesProps = {flexSpacing?: number}
-export type RowBoxProps = Props & {responsive?: boolean | Breakpoint}
+export type RowBoxProps = Props & {
+  responsive?: boolean | Breakpoint
+  halfRespSpacing?: boolean
+}
 export type ChildBoxProps = {
   children?: React.ReactNode
   flex?: EnhancedFlexProp
@@ -89,14 +93,16 @@ const useRowBoxStyles = makeStyles((theme: Theme) =>
     respRowBox: ({
       flexSpacing,
       wrapSpacing,
+      halfRespSpacing,
       respBreakAt,
       respElseAt
     }: RowBoxUseStylesProps) => ({
       [theme.breakpoints.down(respBreakAt)]: {
         ...(typeof flexSpacing === 'number' && {
-          marginTop: theme.spacing(flexSpacing) * -1,
+          marginTop:
+            theme.spacing(flexSpacing) * -1 * (halfRespSpacing ? 0.5 : 1),
           '& > .flexBox__child': {
-            marginTop: theme.spacing(flexSpacing)
+            marginTop: theme.spacing(flexSpacing) * (halfRespSpacing ? 0.5 : 1)
             // This bit is redundant with Column layout
             // ...(flexWrap && {
             //   marginTop: theme.spacing(flexSpacing)
@@ -182,6 +188,7 @@ const FlexBox = ({
 const RowBox = ({
   children,
   flexSpacing,
+  halfRespSpacing = true,
   className: classNameProp,
   responsive = false,
   flexWrap,
@@ -215,11 +222,13 @@ const RowBox = ({
     : typeof wrapSpacingProp === 'number'
     ? wrapSpacingProp
     : flexSpacing
+
   const classes = useRowBoxStyles({
     flexSpacing,
     respBreakAt,
     respElseAt,
-    wrapSpacing
+    wrapSpacing,
+    halfRespSpacing
   })
 
   const flexDirection = useMemo(() => {
