@@ -2,16 +2,13 @@ import React, {useMemo} from 'react'
 import {
   Box,
   Theme,
-  createStyles,
-  makeStyles,
   useTheme,
-  BoxProps
-} from '@material-ui/core'
-import clsx from 'clsx'
-import {
+  BoxProps,
   Breakpoint,
-  BreakpointValues
-} from '@material-ui/core/styles/createBreakpoints'
+  Breakpoints
+} from '@mui/material'
+import {createStyles, makeStyles} from '@mui/styles'
+import clsx from 'clsx'
 
 type EnhancedFlexProp =
   | BoxProps['flex']
@@ -36,6 +33,8 @@ type RowBoxUseStylesProps = {
   respElseAt: Breakpoint
 }
 type ColBoxUseStylesProps = {flexSpacing?: number}
+type BreakpointValues = Breakpoints['values']
+
 export type RowBoxProps = Props & {
   responsive?: boolean | Breakpoint
   halfRespSpacing?: boolean
@@ -100,9 +99,13 @@ const useRowBoxStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down(respBreakAt)]: {
         ...(typeof flexSpacing === 'number' && {
           marginTop:
-            theme.spacing(flexSpacing) * -1 * (halfRespSpacing ? 0.5 : 1),
+            parseFloat(theme.spacing(flexSpacing)) *
+            -1 *
+            (halfRespSpacing ? 0.5 : 1),
           '& > .flexBox__child': {
-            marginTop: theme.spacing(flexSpacing) * (halfRespSpacing ? 0.5 : 1)
+            marginTop:
+              parseFloat(theme.spacing(flexSpacing)) *
+              (halfRespSpacing ? 0.5 : 1)
             // This bit is redundant with Column layout
             // ...(flexWrap && {
             //   marginTop: theme.spacing(flexSpacing)
@@ -112,7 +115,7 @@ const useRowBoxStyles = makeStyles((theme: Theme) =>
       },
       [theme.breakpoints.up(respElseAt)]: {
         ...(typeof flexSpacing === 'number' && {
-          marginLeft: theme.spacing(flexSpacing) * -1
+          marginLeft: parseFloat(theme.spacing(flexSpacing)) * -1
         }),
         ...(typeof wrapSpacing === 'number' && {
           marginTop: theme.spacing(wrapSpacing * -1)
@@ -129,7 +132,7 @@ const useRowBoxStyles = makeStyles((theme: Theme) =>
     }),
     rowBox: ({flexSpacing, wrapSpacing}: RowBoxUseStylesProps) => ({
       ...(typeof flexSpacing === 'number' && {
-        marginLeft: theme.spacing(flexSpacing) * -1
+        marginLeft: parseFloat(theme.spacing(flexSpacing)) * -1
       }),
       ...(typeof wrapSpacing === 'number' && {
         marginTop: theme.spacing(wrapSpacing * -1)
@@ -150,7 +153,7 @@ const useColBoxStyles = makeStyles((theme: Theme) =>
   createStyles({
     colBox: ({flexSpacing}: ColBoxUseStylesProps) => ({
       ...(typeof flexSpacing === 'number' && {
-        marginTop: theme.spacing(flexSpacing) * -1,
+        marginTop: parseFloat(theme.spacing(flexSpacing)) * -1,
         '& > .flexBox__child': {
           marginTop: theme.spacing(flexSpacing)
         }
@@ -195,11 +198,13 @@ const RowBox = ({
   wrapSpacing: wrapSpacingProp,
   ...rest
 }: RowBoxProps) => {
-  const respBreakAt = useMemo(
+  const respBreakAt: Breakpoint = useMemo(
     () => (!responsive || responsive === true ? 'xs' : responsive),
     [responsive]
   )
+
   const theme = useTheme()
+
   const breakpoints = useMemo(
     () =>
       // For typescript reference see https://fettblog.eu/typescript-better-object-keys
@@ -211,9 +216,9 @@ const RowBox = ({
         .sort((a, b) => a.value - b.value),
     [theme]
   )
-  const respElseAt = useMemo(() => {
+  const respElseAt: Breakpoint = useMemo(() => {
     const idx = breakpoints.findIndex((a) => a.key === respBreakAt)
-    return breakpoints[idx + 1].key
+    return breakpoints[idx + 1].key as Breakpoint
   }, [breakpoints, respBreakAt])
 
   const isFlexWrap = flexWrap === 'wrap'
@@ -231,7 +236,7 @@ const RowBox = ({
     halfRespSpacing
   })
 
-  const flexDirection = useMemo(() => {
+  const flexDirection: Props['flexDirection'] = useMemo(() => {
     switch (responsive) {
       case false:
         return 'row'

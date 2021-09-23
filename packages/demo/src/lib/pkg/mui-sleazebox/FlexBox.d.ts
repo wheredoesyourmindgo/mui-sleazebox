@@ -1,6 +1,5 @@
 import React from 'react';
-import { BoxProps } from '@material-ui/core';
-import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+import { BoxProps, Breakpoint } from '@mui/material';
 declare type EnhancedFlexProp = BoxProps['flex'] | boolean | 'grow' | 'nogrow' | 'noshrink';
 declare type Props = {
     flexSpacing?: number;
