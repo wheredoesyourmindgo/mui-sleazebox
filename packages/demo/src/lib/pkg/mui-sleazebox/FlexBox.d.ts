@@ -18,9 +18,9 @@ export declare type ChildBoxProps = {
 } & Omit<BoxProps, 'flex'>;
 export type { Props as FlexBoxProps };
 export type { Props as ColumnBoxProps };
-declare const FlexBox: ({ children, child, className: classNameProp, ...rest }: Props) => JSX.Element;
-declare const RowBox: ({ children, flexSpacing, halfRespSpacing, responsive, flexWrap, wrapSpacing: wrapSpacingProp, ...rest }: RowBoxProps) => JSX.Element;
-declare const ColumnBox: ({ children, flexSpacing, ...rest }: Props) => JSX.Element;
+declare const FlexBox: ({ children, child, className: classNameProp, sx, ...rest }: Props) => JSX.Element;
+declare const RowBox: ({ children, flexSpacing, halfRespSpacing, responsive, flexWrap, flexDirection: flexDirectionProp, wrapSpacing: wrapSpacingProp, sx, ...rest }: RowBoxProps) => JSX.Element;
+declare const ColumnBox: ({ children, flexSpacing, flexDirection: flexDirectionProp, sx, ...rest }: Props) => JSX.Element;
 declare const ChildBox: ({ children, className: classNameProp, ...rest }: ChildBoxProps) => JSX.Element;
 export { RowBox, ColumnBox, ChildBox, FlexBox };
 export default FlexBox;

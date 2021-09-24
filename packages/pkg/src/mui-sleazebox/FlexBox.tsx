@@ -71,10 +71,10 @@ const useEnhancedFlexProp = (flexProp: EnhancedFlexProp): BoxProps['flex'] => {
   return flex
 }
 
-const EnhancedBox = ({children, flex: flexProp, ...rest}: Props) => {
+const EnhancedBox = ({children, flex: flexProp, sx, ...rest}: Props) => {
   const flex = useEnhancedFlexProp(flexProp)
   return (
-    <Box flex={flex} {...rest}>
+    <Box sx={{flex, ...sx}} {...rest}>
       {children}
     </Box>
   )
@@ -84,11 +84,12 @@ const FlexBox = ({
   children,
   child = false,
   className: classNameProp,
+  sx,
   ...rest
 }: Props) => {
   return (
     <EnhancedBox
-      display="flex"
+      sx={{display: 'flex', ...sx}}
       className={clsx([{['flexBox__child']: child}, classNameProp])}
       {...rest}
     >
@@ -103,7 +104,9 @@ const RowBox = ({
   halfRespSpacing = true,
   responsive = false,
   flexWrap,
+  flexDirection: flexDirectionProp, // swallow prop
   wrapSpacing: wrapSpacingProp,
+  sx,
   ...rest
 }: RowBoxProps) => {
   const respBreakAt: Breakpoint = useMemo(
@@ -127,10 +130,6 @@ const RowBox = ({
   const respElseAt: Breakpoint = useMemo(() => {
     const idx = breakpoints.findIndex((a) => a.key === respBreakAt)
     return breakpoints[idx + 1].key as Breakpoint
-  }, [breakpoints, respBreakAt])
-  const respElseAfter: Breakpoint = useMemo(() => {
-    const idx = breakpoints.findIndex((a) => a.key === respBreakAt)
-    return breakpoints[idx + 2].key as Breakpoint
   }, [breakpoints, respBreakAt])
 
   const isFlexWrap = flexWrap === 'wrap'
@@ -160,11 +159,14 @@ const RowBox = ({
 
   return (
     <FlexBox
-      flexDirection={flexDirection}
-      // flexDirection={{xs: 'column', sm: 'row'}}
       sx={{
+        flexDirection,
+        flexWrap,
         ...(responsive && {
-          [theme.breakpoints.down(respElseAfter)]: {
+          [theme.breakpoints.down(respElseAt)]: {
+            // it is unclear why flexDirection prop needs to be placed here within media query in order for media query to apply it
+            flexDirection,
+            flexWrap,
             ...(typeof flexSpacing === 'number' && {
               marginTop: theme.spacing(
                 flexSpacing * -1 * (halfRespSpacing ? 0.5 : 1)
@@ -181,6 +183,9 @@ const RowBox = ({
             })
           },
           [theme.breakpoints.up(respElseAt)]: {
+            // see note above regarding flexDirection and media query
+            flexDirection,
+            flexWrap,
             ...(typeof flexSpacing === 'number' && {
               marginLeft: theme.spacing(flexSpacing * -1)
             }),
@@ -212,9 +217,9 @@ const RowBox = ({
               marginTop: theme.spacing(wrapSpacing)
             })
           }
-        })
+        }),
+        ...sx
       }}
-      flexWrap={flexWrap}
       {...rest}
     >
       {children}
@@ -222,18 +227,25 @@ const RowBox = ({
   )
 }
 
-const ColumnBox = ({children, flexSpacing, ...rest}: Props) => {
+const ColumnBox = ({
+  children,
+  flexSpacing,
+  flexDirection: flexDirectionProp, // swallow prop
+  sx,
+  ...rest
+}: Props) => {
   const theme = useTheme()
   return (
     <FlexBox
-      flexDirection="column"
       sx={{
+        flexDirection: 'column',
         ...(typeof flexSpacing === 'number' && {
           marginTop: theme.spacing(flexSpacing * -1),
           '& > .flexBox__child': {
             marginTop: theme.spacing(flexSpacing)
           }
-        })
+        }),
+        ...sx
       }}
       {...rest}
     >
