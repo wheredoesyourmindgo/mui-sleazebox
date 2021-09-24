@@ -1,12 +1,5 @@
 import React, {useMemo} from 'react'
-import {
-  Box,
-  useTheme,
-  BoxProps,
-  Breakpoint,
-  Breakpoints,
-  useMediaQuery
-} from '@mui/material'
+import {Box, useTheme, BoxProps, Breakpoint, Breakpoints} from '@mui/material'
 import clsx from 'clsx'
 
 type EnhancedFlexProp =
@@ -139,7 +132,6 @@ const RowBox = ({
     const idx = breakpoints.findIndex((a) => a.key === respBreakAt)
     return breakpoints[idx + 2].key as Breakpoint
   }, [breakpoints, respBreakAt])
-  console.log('respElseAt', respElseAt)
 
   const isFlexWrap = flexWrap === 'wrap'
   const wrapSpacing = !isFlexWrap
@@ -166,15 +158,10 @@ const RowBox = ({
     }
   }, [responsive])
 
-  console.log(flexDirection)
-  console.log(theme.breakpoints)
-  const isSM = useMediaQuery(theme.breakpoints.only('sm'))
-  console.log(isSM)
-
   return (
     <FlexBox
+      flexDirection={flexDirection}
       // flexDirection={{xs: 'column', sm: 'row'}}
-      flexDirection={{xs: 'column', sm: 'row'}}
       sx={{
         ...(responsive && {
           [theme.breakpoints.down(respElseAfter)]: {
