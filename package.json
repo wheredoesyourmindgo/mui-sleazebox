@@ -10,10 +10,9 @@
     "packages/*"
   ],
   "license": "MIT",
-  "main": "packages/client/dist/index.js",
+  "main": "packages/pkg/dist/index.js",
   "files": [
-    "packages/client/dist/",
-    "packages/server/dist/",
+    "packages/pkg/dist/",
     "README.md"
   ],
   "author": "Abe Hendricks<moemanchu@icloud.com>",
